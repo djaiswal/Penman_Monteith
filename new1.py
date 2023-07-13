@@ -87,7 +87,7 @@ def fao56_penman_monteith_modified(net_rad, tmax, tmin, ws, rh_mean, atmos_pres,
     for temperature_min_val, temperature_max_val in zip(tmin, tmax):
         temperature = (temperature_min_val + temperature_max_val) / 2.0
         es = 0.6108 * np.exp((17.27 * temperature) / (temperature + 237.3))
-        es = round(es, 2)  # Round to two decimal points
+        #es = round(es, 2)  # Round to two decimal points
         print(f"{temperature}={es}")
         es_values.append(es)
 
@@ -113,13 +113,13 @@ def fao56_penman_monteith_modified(net_rad, tmax, tmin, ws, rh_mean, atmos_pres,
     return eto
 
 # Read the netcdf file(1)
-data = Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_hurs_ind_daily_2021_2030.nc')
-data_1 = Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_ps_ind_daily_2021_2030.nc')
-data_2 = Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_rlds_ind_daily_2021_2030.nc')
-data_3 =Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_rsds_ind_daily_2021_2030.nc')
-data_4 = Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_sfcwind_ind_daily_2021_2030.nc')
-data_5 = Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_tasmax_ind_daily_2021_2030.nc')
-data_6 = Dataset(r'I:\New folder\Weather Files Tanushri\2021_2030\gfdl-esm4_r1i1p1f1_w5e5_ssp585_tasmin_ind_daily_2021_2030.nc')
+data = Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_hurs_ind_daily_2021_2030.nc')
+data_1 = Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_ps_ind_daily_2021_2030.nc')
+data_2 = Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_rlds_ind_daily_2021_2030.nc')
+data_3 =Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_rsds_ind_daily_2021_2030.nc')
+data_4 = Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_sfcwind_ind_daily_2021_2030.nc')
+data_5 = Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_tasmax_ind_daily_2021_2030.nc')
+data_6 = Dataset(r'D:\IITPKD\Penman_Monteith\weatherData\gfdl-esm4_r1i1p1f1_w5e5_ssp585_tasmin_ind_daily_2021_2030.nc')
 
 
 
