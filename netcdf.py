@@ -4,7 +4,7 @@ from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import numpy as np
 
-data = Dataset(r'C:\Python\Project_1\MERRA2_100.inst1_2d_lfo_Nx.19800104.SUB.nc')
+data = Dataset(r'D:\IITPKD\PhD_ESSENCE_IITPKD_Git\Penman_Monteith\MERRA2_100.inst1_2d_lfo_Nx.19800104.SUB.nc')
 print(data)
 data.variables.keys()
 lats = data.variables['lat'][:]
@@ -80,5 +80,5 @@ data.close()
 import netcdf as nc 
 from netCDF4 import Dataset 
 
-data = Dataset(r'C:\Python\new_file.nc')
+data = Dataset(r'D:\IITPKD\PhD_ESSENCE_IITPKD_Git\Penman_Monteith\new_file.nc')
 print(data)

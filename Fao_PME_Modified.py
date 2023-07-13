@@ -111,15 +111,15 @@ def fao56_penman_monteith_modified(net_rad, tmax, tmin, ws, rh_mean, atmos_pres,
     return eto
 
 # Read the Excel file(WeatherForPyeto)
-data = pd.read_excel('.\WeatherForPyeto.xlsx')
+data = pd.read_excel('D:\IITPKD\PhD_ESSENCE_IITPKD_Git\Penman_Monteith\WeatherForPyeto.xlsx')
 # Reading The Excel Sheet Rh_Eto
-Rh_Eto_data = pd.read_excel('.\WeatherForPyeto.xlsx' , sheet_name='Rh_Eto')
+Rh_Eto_data = pd.read_excel('D:\IITPKD\PhD_ESSENCE_IITPKD_Git\Penman_Monteith\WeatherForPyeto.xlsx' , sheet_name='Rh_Eto')
 
 # Reading The Excel Sheet Tmin_Eto
-Tmin_Eto_data = pd.read_excel('.\WeatherForPyeto.xlsx' , sheet_name='Tmin_Eto')
+Tmin_Eto_data = pd.read_excel('D:\IITPKD\PhD_ESSENCE_IITPKD_Git\Penman_Monteith\WeatherForPyeto.xlsx' , sheet_name='Tmin_Eto')
 
 # Reading The Excel Sheet Tmax_Eto
-Tmax_Eto_data = pd.read_excel('.\WeatherForPyeto.xlsx' , sheet_name='Tmax_Eto')
+Tmax_Eto_data = pd.read_excel('D:\IITPKD\PhD_ESSENCE_IITPKD_Git\Penman_Monteith\WeatherForPyeto.xlsx' , sheet_name='Tmax_Eto')
 
 net_rad = data['netsolar'].values
 ws = data['windspeed (m/s)'].values
