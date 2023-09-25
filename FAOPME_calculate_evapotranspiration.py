@@ -7,8 +7,8 @@ import netCDF4 as nc
 G = 0                               # Soil heat flux (not used for daily calculations)
 alpha = 0.23                        # Albedo (typical value for grass reference crop)
 #s2 = 0.1                            # Slope of saturation vapor pressure curve
-R = 287.1                           # Specific gas constant for dry air (J/kg/K)
-Cp = 1005                           # Specific heat capacity of air at constant pressure (J/kg/K) 
+#R = 287.1                           # Specific gas constant for dry air (J/kg/K)
+#Cp = 1005                           # Specific heat capacity of air at constant pressure (J/kg/K) 
 gs_ref=0.0061
 co2_ref=np.full((3652, 61, 61), 330)   #creating an array of same size as netcdf
 
@@ -48,17 +48,17 @@ gs = gs_ref * (1 / (1 + 0.663 * ((data_co2/ co2_ref) - 1)))
 def calculate_et0(temp_max, temp_min, wind_speed, rel_humidity, longwaveRn,shortwaveRn,P):
     
     tmean = (temp_max + temp_min) / 2.0                             # Calculate daily mean temperature (Tmean) in Celsius
-    Rn=(longwaveRn + shortwaveRn)/2
+    Rn = (longwaveRn + shortwaveRn)*(1-alpha)                        # Calculate net radiation in MJ/m2/day Corrected by Sruthi - nandhana makes changes if necessary and remove comment
     
-    es = 0.6108 * np.exp((17.27 * tmean) / (tmean + 237.3))        # Calculate saturation vapor pressure (es) and actual vapor pressure (ea)
-    ea = (rel_humidity / 100.0) * es
+    es = 0.6108 * np.exp((17.27 * tmean) / (tmean + 237.3))         # Calculate saturation vapor pressure (es) and actual vapor pressure (ea) in kPa
+    ea = (rel_humidity / 100.0) * es                                # rel_humidity units in %
            
-    delta = (4098 * es) / ((tmean + 237.3) ** 2)                   # Calculate the slope of the saturation vapor pressure curve (delta)
+    delta = (4098 * es) / ((tmean + 237.3) ** 2)                    # Calculate the slope of the saturation vapor pressure curve (delta) in kpa/deg Cel
 
-    gamma = (Cp * 0.001) * (P / (0.622 * R))                       # Calculate the psychrometric constant (gamma)
+    gamma = 0.000665 * P                                            # Calculate the psychrometric constant (gamma) kPa deg C using atmp pressure
 
     et0 = ((0.408 * delta * (Rn - G) + (gamma * (900 / (tmean + 273)) * wind_speed * (es - ea))) /         # Calculate ET0 using the Penman-Monteith equation
-           (delta + gamma * (1 + 0.34 * wind_speed)/gs))
+           (delta + gamma * (1 + (0.035 * wind_speed/gs))))
 
     return et0
 
