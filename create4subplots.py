@@ -53,12 +53,6 @@ cbar1 = plt.colorbar(plot, cax=cax1, orientation='vertical', label='Evapotranspi
 cbar2 = plt.colorbar(plot, cax=cax2, orientation='vertical', label='Evapotranspiration (in mm/day)', extend='both')
 cbar3 = plt.colorbar(plot, cax=cax3, orientation='vertical', label='Evapotranspiration (in mm/day)', extend='both')
 
-# Disable tick labels on the colorbars
-cbar0.set_ticks([])
-cbar1.set_ticks([])
-cbar2.set_ticks([])
-cbar3.set_ticks([])
-
 plt.suptitle('Comparison of Mean Evapotranspiration'.format(max_value),fontsize=20)
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 plt.show()
