@@ -15,7 +15,7 @@ file_pattern = '*.nc'
 file_paths = glob.glob(os.path.join(directory_path, file_pattern))
 
 # Initialize an empty DataFrame to store the results
-result_df = pd.DataFrame(columns=['File', 'Year', 'Mean Ref. ETo'])
+result_df = pd.DataFrame(columns=['File', 'Year', 'Mean Difference in Ref. ETo'])
 
 # Iterate through each file
 for file_path in file_paths:
