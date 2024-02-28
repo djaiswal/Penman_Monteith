@@ -7,9 +7,10 @@ from datetime import datetime, timedelta
 import geopandas as gpd
 import os
 import glob
+import pandas as pd
 
 # Directory containing NetCDF files
-directory_path = r'E:\ISIMIP Climate Data\eto_masked_changed\eto_files\ukesm_eto'
+directory_path = r'O:/ISIMIP Climate Data and final results/eto_masked_changed/eto_files/ukesm_eto'
 
 # Define the pattern to match NetCDF files
 file_pattern = '*.nc'
@@ -65,11 +66,12 @@ for file_path in file_paths:
     mean_et.append(mean_monsoon_eto)
     mean_et.append(mean_post_monsoon_eto)
 
+       
     lat = dataset.variables['lat'][:]
     lon = dataset.variables['lon'][:]
     time = dataset.variables['time'][:]
 
-    shapefile_path = r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\india_state_boundary_projected.shp"
+    shapefile_path = r"O:/ISIMIP Climate Data and final results/SHapefiles and netcdf file_02_12_2023/india_state_boundary_projected.shp"
     states = gpd.read_file(shapefile_path)
     states = states.to_crs(ccrs.PlateCarree().proj4_init)
 
