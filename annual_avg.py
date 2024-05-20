@@ -53,7 +53,7 @@ for file_path in file_paths:
     dataset.close()
 
 # Export the final DataFrame to Excel
-excel_file_path = 'E:\ISIMIP Climate Data\eto_masked_changed\difference_with_headings.xlsx'
+excel_file_path = 'E:\ISIMIP Climate Data\eto_masked_changed\difference_with_headings.xlsx'        # enter the file path where data has to be saved
 result_df.to_excel(excel_file_path, index=False)
 
 print(f"Data exported to {excel_file_path}")
