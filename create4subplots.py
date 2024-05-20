@@ -4,7 +4,7 @@ import numpy as np
 import cartopy.crs as ccrs
 import cartopy.feature
 
-# Define the paths to your four NetCDF files
+# Define the paths to your four NetCDF files to be plotted
 file_paths = [
     r"D:\GFDL_ESM4_new\evapotranspiration_with_co2_2091-2100.nc",
     r"D:\GFDL_ESM4_new\evapotranspiration_without_co2_2091-2100.nc",
