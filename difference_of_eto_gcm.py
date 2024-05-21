@@ -7,9 +7,9 @@ with_CO2_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked1_ipsl_et0_202
 without_CO2 = nc.Dataset(without_CO2_file, 'r')
 with_CO2 = nc.Dataset(with_CO2_file, 'r')
 
-time_dim = 3652  # size of time dimension
-latitude_dim = 61  # latitude dimension
-longitude_dim = 61  # longitude dimension
+time_dim = 3652                                          # size of time dimension
+latitude_dim = 61                                        # latitude dimension
+longitude_dim = 61                                       # longitude dimension
 
 # Create a new NetCDF file
 output_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked_ipsl_et0_2021-2030_difference.nc"
