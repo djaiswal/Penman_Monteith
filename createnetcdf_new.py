@@ -41,7 +41,7 @@ shortwave_data = shortwave_file.variables['rsds'][:]
 longwave_data = longwave_file.variables['rlds'][:] 
 
 # Calculate net radiation by summing shortwave and longwave
-net_radiation_data = shortwave_data + longwave_data
+net_radiation_data = shortwave_data + longwave_data/2
 
 # Assign data to variables
 time_var[:] = np.arange(time_dim)
