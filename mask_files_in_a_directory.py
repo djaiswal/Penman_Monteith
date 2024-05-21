@@ -5,7 +5,8 @@ import sys
 
 input_directory = 'E:\ISIMIP Climate Data\et0_unmasked_7.25-37.25_67.75-97.75'
 output_directory = r"E:\ISIMIP Climate Data\et0_masked"  
-mask_data= nc.Dataset(r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_lat_lon_adj_india_02_12_2023.nc", 'r')
+mask_data= nc.Dataset(r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_lat_lon_adj_india_02_12_2023.nc", 'r')  # file which has 1 at places inside 
+                                                                                                                                          # India and 0 outside India.
 
 for filename in os.listdir(input_directory):
     if filename.endswith('.nc'):
@@ -15,8 +16,8 @@ for filename in os.listdir(input_directory):
         nc_dataset = nc.Dataset(input_file_path, 'r')
 
 
-        min_lat, max_lat = 7.25,37.25    
-        min_lon, max_lon = 67.75,97.75   
+        min_lat, max_lat = 7.25,37.25                                            # minimum and maximum latitudes of India
+        min_lon, max_lon = 67.75,97.75                                           # minimum and maximum latituses of India
 
 
         lat = nc_dataset.variables['lat'][:]
@@ -29,6 +30,7 @@ for filename in os.listdir(input_directory):
 
         subset_data = nc_dataset.variables[list(nc_dataset.variables.keys())[3]][:, lat_indices, lon_indices] * mask_data.variables['mask_data'][:, :,:]
 
+        # Define dimensions and attributes for output file.
         output_dataset = nc.Dataset(output_file_path, 'w', format='NETCDF4')
 
 
