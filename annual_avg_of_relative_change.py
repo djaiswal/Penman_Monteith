@@ -4,7 +4,7 @@ import netCDF4 as nc
 import numpy as np
 from datetime import datetime
 import pandas as pd
-
+# NOTE : 
 # Directory containing NetCDF files
 directory_path = 'E:\ISIMIP Climate Data\eto_masked_changed\difference_netcdf_files'
 
