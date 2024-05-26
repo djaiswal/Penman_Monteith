@@ -1,6 +1,6 @@
 import numpy as np
 import netCDF4 as nc
-
+# 
 # Define constants for the Penman-Monteith equation
 
 G = 0                                                    # Soil heat flux
@@ -142,7 +142,7 @@ time_dim = len(datahurs.dimensions['time'])
 latitude_dim = len(datahurs.dimensions['lat'])
 longitude_dim = len(datahurs.dimensions['lon'])
 
-# Create a new NetCDF file
+# Create a new NetCDF file of ETo for individual GCMs and timeperiod
 output_file = r"E:\ISIMIP Climate Data\eto_equation_changed\gfdl_esm4_changed_et0_2021-2030_with_CO2.nc"    # destination of output file
 dataset = nc.Dataset(output_file, 'w', format='NETCDF4')
 
