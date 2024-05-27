@@ -1,14 +1,22 @@
 import os
 import glob
+# NOTE : This code calculates annual avg of ETo from daily ETo for both the timeperiods and five GCMs.
+
+#        The first input required is the filepath to the directory containing NetCDF files of 
+#        daily Eto. Eg : 'E:\ISIMIP Climate Data\eto_masked_changed\eto_files'
+#        The second input required is the absolute filepath to excel sheet to which annual average of
+#        Eto has to be saved. 
+
+
 import netCDF4 as nc
 import numpy as np
 from datetime import datetime
 import pandas as pd
 
-# NOTE : Calculates annual avg of ETo from daily ETo for both the timeperiods and five GCMs.
 
 # Directory containing NetCDF files
-directory_path = 'E:\ISIMIP Climate Data\eto_masked_changed\eto_files'
+directory_path = input("Enter the absolute filepath to the directory containing NetCDF files of ETo : ")
+# Eg : directory_path = 'E:\ISIMIP Climate Data\eto_masked_changed\eto_files'
 
 # Define the pattern to match NetCDF files
 file_pattern = '*.nc'
@@ -55,7 +63,8 @@ for file_path in file_paths:
     dataset.close()
 
 # Export the final DataFrame to Excel
-excel_file_path = 'E:\ISIMIP Climate Data\eto_masked_changed\difference_with_headings.xlsx'        # enter the file path where data has to be saved
+excel_file_path = input("Enter the absolute filepath to the excel sheet where the data has to be saved : ")
+# excel_file_path = 'E:\ISIMIP Climate Data\eto_masked_changed\difference_with_headings.xlsx'        # enter the file path where data has to be saved
 result_df.to_excel(excel_file_path, index=False)
 
 print(f"Data exported to {excel_file_path}")
