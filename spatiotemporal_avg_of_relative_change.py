@@ -7,8 +7,6 @@
 
 from netCDF4 import Dataset
 import numpy as np
-import os
-import glob
 import tkinter as tk
 from tkinter import filedialog
 
