@@ -1,9 +1,29 @@
+
+# NOTE : This code code calculates the relative change in ETo under the scenarios
+#        when the effect of CO2 is considered and the effect of CO2 is not considered.
+
+#        The first input required is the absolute filepath to the NetCDF file containing
+#        the data of ETo calculated without considering the effect of CO2.
+#        The second input required is the absolute filepath to the NetCDF file containing
+#        the data of ETo calculated considering the effect of CO2.
+#        The third input required is the absolute filepath to the NetCDF where the the data
+#        corresponding to the difference in ETo (when CO2 is not considered and CO2 is considered)
+#        has to be stored. (This file need not exist before running this code. It will be created if
+#        it does not exist already.)
+
+
 import netCDF4 as nc
 import numpy as np
 
 # Open the existing NetCDF files
-without_CO2_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked1_ipsl_et0_2021-2030_without_CO2.nc"
-with_CO2_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked1_ipsl_et0_2021-2030_with_CO2.nc"
+
+without_CO2_file = input(
+    "Enter the absolute filepath to the NetCDF file with ETo data calculated without CO2 : ")
+# Eg: without_CO2_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked1_ipsl_et0_2021-2030_without_CO2.nc"
+with_CO2_file = input(
+    "Enter the absolute filepath to the NetCDF file with ETo data calculated considering CO2 : ")
+# Eg: with_CO2_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked1_ipsl_et0_2021-2030_with_CO2.nc"
+
 without_CO2 = nc.Dataset(without_CO2_file, 'r')
 with_CO2 = nc.Dataset(with_CO2_file, 'r')
 
@@ -12,7 +32,9 @@ latitude_dim = 61                                        # latitude dimension
 longitude_dim = 61                                       # longitude dimension
 
 # Create a new NetCDF file
-output_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked_ipsl_et0_2021-2030_difference.nc"
+output_file = input(
+    "Enter the absolute filepath to the NetCDF file where the data has to be stored : ")
+# Eg: output_file = r"E:\ISIMIP Climate Data\eto_masked_changed\masked_ipsl_et0_2021-2030_difference.nc"
 dataset = nc.Dataset(output_file, 'w', format='NETCDF4')
 
 # Define dimensions in the NetCDF file
@@ -34,14 +56,15 @@ latitude_var.units = 'degrees_north'
 longitude_var.units = 'degrees_east'
 
 # Define the variable for net radiation
-output_var = dataset.createVariable('difference_in_eto', np.float32, ('time', 'lat', 'lon',))
+output_var = dataset.createVariable(
+    'difference_in_eto', np.float32, ('time', 'lat', 'lon',))
 
 # Define units and attributes for net radiation
 output_var.units = 'mm/day'
 output_var.long_name = 'Difference in ETo with and without the effect of CO2'
 
 withoutCO2_data = without_CO2.variables['evapotranspiration'][:]
-withCO2_data = with_CO2.variables['evapotranspiration'][:] 
+withCO2_data = with_CO2.variables['evapotranspiration'][:]
 
 
 # Applying mask by multiplying with the mask file
@@ -49,8 +72,8 @@ difference_data = withoutCO2_data - withCO2_data
 
 # Assign data to variables
 time_var[:] = np.arange(time_dim)
-latitude_var[:] = np.linspace(37.25,7.25, latitude_dim)
-longitude_var[:] = np.linspace( 67.75,97.75, longitude_dim)
+latitude_var[:] = np.linspace(37.25, 7.25, latitude_dim)
+longitude_var[:] = np.linspace(67.75, 97.75, longitude_dim)
 output_var[:] = difference_data
 
 # Close the NetCDF file
