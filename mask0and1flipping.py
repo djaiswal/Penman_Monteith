@@ -1,12 +1,24 @@
+# NOTE : This code is used to flip the values to create a proper mask file.
+#        It requires the absolute file path to the netCDF file which has value as 0 for required locations
+#        and value as 1 for other locations.This file can be obtained by processing the shapefile of 
+#        of India in the ArcGIS software. Here the required location is the area in the Indian Mainland.
+
+#        This code requires the absolute file path to the NetCDF file with value as 0 for required locations
+#        as the first input.
+#        The absolute file path to the the NetCDF file where the new mask file has to be saved is the 
+#        second input required.
+
+       
 import netCDF4 as nc
 import numpy as np
-
-input_mask_file = nc.Dataset(r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1india_02_12_2023.nc", 'r')
+input_mask_file = input("Enter the absolute path to the NetCDF file with value as 0 at the required locations : ")
+input_mask_file = nc.Dataset(input_mask_file, 'r')
 
 latitude_dim = len(input_mask_file.dimensions['lat'])
 longitude_dim = len(input_mask_file.dimensions['lon'])
 
-output_file = r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_02_12_2023.nc"                        #Destination of output file
+output_file = input("Enter the absolute filepath to the NetCDF file where the mask file has to be saved : ")
+# Eg: output_file = r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_02_12_2023.nc"                        #Destination of output file
 dataset = nc.Dataset(output_file, 'w', format='NETCDF4')
 
 latitude = dataset.createDimension('lat', latitude_dim)

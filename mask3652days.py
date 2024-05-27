@@ -1,7 +1,15 @@
+
+# NOTE : This code is used to replicate the mask for 3652 timesteps from the mask file for one timestep.
+#        This requires the absolute  file path to the maskfile with one timestep as first input.
+#        The second input required is the absolute filepath to the location where the maskfile for 
+#        3652 timesteps has to be stored.
+
 import numpy as np
 import netCDF4 as nc
 
-mask_file = nc.Dataset(r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_02_12_2023.nc", 'r')
+mask_file_path = input("Enter the absolute path to the NetCDF mask file :")
+# Eg : "E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_02_12_2023.nc"
+mask_file = nc.Dataset(mask_file_path, 'r')
 
 
 latitudes =   mask_file.variables['lat'][:]
@@ -14,7 +22,9 @@ lon_size = len(longitudes)
 time_size = 3652
 
 # Creating the new NetCDF file 
-with nc.Dataset(r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_3652.nc", 'w', format='NETCDF4') as nc:
+output_file = input("Enter the file path to the NetCDF file where the mask for 3652 timestep has to be stored : ")
+# Eg : r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_3652.nc"
+with nc.Dataset(output_file, 'w', format='NETCDF4') as nc:
     # Define the dimensions
     nc.createDimension('lat', lat_size)
     nc.createDimension('lon', lon_size)

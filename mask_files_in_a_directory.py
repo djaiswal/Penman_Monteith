@@ -1,12 +1,27 @@
+#  NOTE : This code creates a maskfile to mask the NetCDF files appropriately and retains only the required location.
+#         This makes use of a mask file which has value as 1 inside the required locations and value
+#         as 0 outside the required locations. This mask file is created using the codes mask0and2flipping.py
+#         and mask3652.py
+
+#         This code requires the absolute filepath to the directory containing the unmasked files as 
+#         first input. 
+#         The second input required is the absolute filepath to the output direcory where the masked files has
+#         to be saved.
+#         This code also requires the absolute path to the mask file.  
+ 
 import os as os
 import netCDF4 as nc
 import numpy as np
 import sys
 
-input_directory = 'E:\ISIMIP Climate Data\et0_unmasked_7.25-37.25_67.75-97.75'
-output_directory = r"E:\ISIMIP Climate Data\et0_masked"  
-mask_data= nc.Dataset(r"E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_lat_lon_adj_india_02_12_2023.nc", 'r')  # file which has 1 at places inside 
-                                                                                                                                          # India and 0 outside India.
+input_directory = input("Enter the absolute file path to the directory containing the unmasked NetCDF files : ")
+# Eg : input_directory = 'E:\ISIMIP Climate Data\et0_unmasked_7.25-37.25_67.75-97.75'
+output_directory = input("Enter the absolute path to the directory where the masked files are to be stored : ")
+# Eg : output_directory = r"E:\ISIMIP Climate Data\et0_masked"  
+mask_data = input("Enter the absolute filepath to the mask file : ")             # file which has 1 at places inside 
+                                                                                 # India and 0 outside India.
+# Eg : mask_data= "E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_lat_lon_adj_india_02_12_2023.nc"
+mask_data = nc.Dataset(mask_data, 'r')                                                                                                                                                                                    
 
 for filename in os.listdir(input_directory):
     if filename.endswith('.nc'):

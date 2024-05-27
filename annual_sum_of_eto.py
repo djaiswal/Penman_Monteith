@@ -1,3 +1,9 @@
+# NOTE : This code calculates the total ETo annualy for a given NetCDF file which has daily ETo values.
+#        The calculated values are stored in an excel sheet. 
+#        The first input required is the absolute filepath to the directory which has NetCDF files of 
+#        ETo values for a GCM.This directory can have NetCDF files for one GCM calculated 
+#        for different time periods and under different conditions of CO2 (whether the effect of CO2 is 
+#        considered or not. )  
 import os
 import glob
 import netCDF4 as nc
@@ -6,7 +12,8 @@ from datetime import datetime
 import pandas as pd
 
 # Directory containing NetCDF files
-directory_path = r'E:\ISIMIP Climate Data\eto_masked_changed\eto_files\ukesm_eto'
+directory_path = input("Enter the absolute file path to the directory containing NetCDF files of ETo : ")
+# Eg : directory_path = r'E:\ISIMIP Climate Data\eto_masked_changed\eto_files\ukesm_eto'
 
 # Define the pattern to match NetCDF files
 file_pattern = '*.nc'
@@ -54,7 +61,8 @@ for file_path in file_paths:
     dataset.close()
 
 # Export the final DataFrame to Excel
-excel_file_path = r'E:\ISIMIP Climate Data\eto_masked_changed\ukesm_annual_sum_of_eto.xlsx'
+excel_file_path = input("Enter the absolute file path to the excel sheet where the data has to be stored : ")
+# excel_file_path = r'E:\ISIMIP Climate Data\eto_masked_changed\ukesm_annual_sum_of_eto.xlsx'
 result_df.to_excel(excel_file_path, index=False)
 
 print(f"Data exported to {excel_file_path}")

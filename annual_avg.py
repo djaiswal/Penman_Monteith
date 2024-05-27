@@ -1,6 +1,6 @@
-import os
-import glob
+
 # NOTE : This code calculates annual avg of ETo from daily ETo for both the timeperiods and five GCMs.
+#        The calculated values are stored in an excel sheet. 
 
 #        The first input required is the filepath to the directory containing NetCDF files of 
 #        daily Eto. Eg : 'E:\ISIMIP Climate Data\eto_masked_changed\eto_files'
@@ -12,7 +12,8 @@ import netCDF4 as nc
 import numpy as np
 from datetime import datetime
 import pandas as pd
-
+import os
+import glob
 
 # Directory containing NetCDF files
 directory_path = input("Enter the absolute filepath to the directory containing NetCDF files of ETo : ")
