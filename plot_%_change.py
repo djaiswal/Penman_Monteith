@@ -1,3 +1,8 @@
+# NOTE : This code plots the percentage change of ETo values.
+#        For this we need NetCDF files with percentage change in ETo data calculated without considering
+#        the effect of CO2 and ETo data of 2021-2030 calculated considering the effect of CO2.
+#        This file can be generated using percentage_change_netcdf.py
+
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 import numpy as np

@@ -1,3 +1,7 @@
+# NOTE : This code calculates the percentage change of ETo values and saves it as a netCDF file.
+#        For this we need NetCDF files with ETo data of calculated without considering
+#        the effect of CO2 and ETo data of 2021-2030 calculated considering the effect of CO2
+
 import netCDF4 as nc
 import numpy as np
 

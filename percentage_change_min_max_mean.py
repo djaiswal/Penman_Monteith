@@ -1,3 +1,9 @@
+# NOTE : This code calculates the mean, maximum and minimum percentage change of ETo values
+#        For this we need NetCDF files with ETo data of 2021-2030 calculated without considering
+#        the effect of CO2, ETo data of 2021-2030 calculated considering the effect of CO2
+#        ETo data of 2091-2100 calculated without considering the effect of CO2, and
+#        ETo data of 2091-2100 calculated considering the effect of CO2
+
 from netCDF4 import Dataset
 import numpy as np
 
