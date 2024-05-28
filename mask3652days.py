@@ -6,9 +6,28 @@
 
 import numpy as np
 import netCDF4 as nc
+import tkinter as tk
+from tkinter import filedialog
 
-mask_file_path = input("Enter the absolute path to the NetCDF mask file :")
-# Eg : "E:\ISIMIP Climate Data\SHapefiles and netcdf file_02_12_2023\0and1_proper_india_02_12_2023.nc"
+def browse_maskfile():
+        global mask_file_path
+        mask_file_path = filedialog.askopenfilename(filetypes=[("NetCDF file", "*.nc"), ("All files", "*.*")])
+        label_1.config(text=f"Path to shapefile : {mask_file_path}")
+
+def finish():
+    root.destroy()
+
+root = tk.Tk()
+root.title("File Browser to select a maskfile")
+root.geometry("800x200")
+finish_button = tk.Button(root, text="Finish selecting file", command=finish)
+finish_button.pack(pady=20)
+button_1 = tk.Button(root, text="Browse Mask file", command=browse_maskfile)
+button_1.pack(pady=5)
+label_1 = tk.Label(root, text="Mask file : ")
+label_1.pack(pady=10)
+root.mainloop()
+
 mask_file = nc.Dataset(mask_file_path, 'r')
 
 

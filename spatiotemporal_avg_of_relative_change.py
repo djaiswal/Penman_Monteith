@@ -10,12 +10,10 @@ import numpy as np
 import tkinter as tk
 from tkinter import filedialog
 
-filelist = []
-
 # Assuming that we are calculating the spatio-temporal average
-file_paths = [""] * 5
 # of relative change for 5 GCMs together. If not, change the number here
 # add or remove the GCM's name in the following line.
+file_paths = [""] * 5
 GCM_list = ['GFDL-ESM4', 'IPSL-CM6A-LR',
             'MRI-ESM2-0', 'MPI-ESM1-2-HR', 'UKESM1-0-LL']
 

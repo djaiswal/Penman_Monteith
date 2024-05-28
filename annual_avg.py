@@ -2,10 +2,9 @@
 # NOTE : This code calculates annual avg of ETo from daily ETo for both the timeperiods and five GCMs.
 #        The calculated values are stored in an excel sheet. 
 
-#        The first input required is the filepath to the directory containing NetCDF files of 
-#        daily Eto. Eg : 'E:\ISIMIP Climate Data\eto_masked_changed\eto_files'
-#        The second input required is the absolute filepath to excel sheet to which annual average of
-#        Eto has to be saved. 
+#        Select the directory containing NetCDF files of daily Eto. from selection window.
+#        The second input required is the absolute filepath to excel sheet to which 
+#        annual average of Eto has to be saved. 
 
 
 import netCDF4 as nc
@@ -14,10 +13,31 @@ from datetime import datetime
 import pandas as pd
 import os
 import glob
+import tkinter as tk
+from tkinter import filedialog
 
-# Directory containing NetCDF files
-directory_path = input("Enter the absolute filepath to the directory containing NetCDF files of ETo : ")
-# Eg : directory_path = 'E:\ISIMIP Climate Data\eto_masked_changed\eto_files'
+directory_path = ""
+def browse_directory():
+    global directory_path
+    directory_path = filedialog.askdirectory()
+    if directory_path:
+        directory_label.config(text=f"Selected Directory with ETo files : {directory_path}")
+
+def finish():
+    root.destroy()
+
+# Create the main window
+root = tk.Tk()
+root.title("Directory Browser to find annual average of relative change")
+root.geometry("800x200")  # Set the window size to 800x200
+directory_button = tk.Button(root, text="Browse Directory ", command=browse_directory)
+directory_button.pack(pady=10)
+directory_label = tk.Label(root, text="Selected Directory: ")
+directory_label.pack(pady=20)
+finish_button = tk.Button(root, text="Finish selecting directory", command=finish)
+finish_button.pack(pady=20)
+root.mainloop()
+
 
 # Define the pattern to match NetCDF files
 file_pattern = '*.nc'

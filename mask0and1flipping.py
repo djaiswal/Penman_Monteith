@@ -11,8 +11,29 @@
        
 import netCDF4 as nc
 import numpy as np
-input_mask_file = input("Enter the absolute path to the NetCDF file with value as 0 at the required locations : ")
-input_mask_file = nc.Dataset(input_mask_file, 'r')
+import tkinter as tk
+from tkinter import filedialog
+
+def browse_maskfile():
+        global mask_file_path
+        mask_file_path = filedialog.askopenfilename(filetypes=[("NetCDF file", "*.nc"), ("All files", "*.*")])
+        label_1.config(text=f"Path to shapefile : {mask_file_path}")
+
+def finish():
+    root.destroy()
+
+root = tk.Tk()
+root.title("File Browser to select a maskfile")
+root.geometry("800x200")
+finish_button = tk.Button(root, text="Finish selecting file", command=finish)
+finish_button.pack(pady=20)
+button_1 = tk.Button(root, text="Browse Mask file", command=browse_maskfile)
+button_1.pack(pady=5)
+label_1 = tk.Label(root, text="Mask file : ")
+label_1.pack(pady=10)
+root.mainloop()
+
+input_mask_file = nc.Dataset(mask_file_path, 'r')
 
 latitude_dim = len(input_mask_file.dimensions['lat'])
 longitude_dim = len(input_mask_file.dimensions['lon'])
