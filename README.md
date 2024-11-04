@@ -23,24 +23,24 @@ This project contains Python scripts for calculating and analyzing reference eva
     ```
 2. Download NetCDF files and set up directories as described in each section.
 
-## II. Calculate Daily Reference Evapotranspiration
+## III. Calculate Daily Net radiation
 
-`daily_eto_calculation.py`  
+`calculate_radiation.py`  
+This script calculates daily radiation input NetCDF files. The calculated values are saved in new NetCDF files.
+
+### Steps:
+1. Select the required input files.
+2. Choose where to save the output daily radiation files.
+   
+## III. Calculate Daily Reference Evapotranspiration
+
+`calculate_Eto.py`  
 This script calculates daily ETo using input NetCDF files. The calculated values are saved in new NetCDF files.
 
 ### Steps:
 1. Create a directory to save the output files, e.g., `daily_ETo`.
 2. Select the directory containing input climate data in NetCDF format.
 3. Choose where to save the output daily ETo files.
-
-## III. Prepare NetCDF Files
-
-`prepare_netcdf.py`  
-This script converts CSV data into NetCDF format for further analysis.
-
-### Steps:
-1. Select the CSV files containing climate data.
-2. Choose the directory where the NetCDF files will be saved.
 
 ## IV. Calculate Annual Values of Reference Evapotranspiration
 
