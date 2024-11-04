@@ -5,8 +5,8 @@ This project contains Python scripts for calculating and analyzing reference eva
 ## Table of Contents
 
 - [I. Setup Instructions](#i-setup-instructions)
-- [II. Calculate Daily Reference Evapotranspiration](#ii-calculate-daily-reference-evapotranspiration)
-- [III. Prepare NetCDF Files](#iii-prepare-netcdf-files)
+- [II. Calculate Daily Net_radiation](#ii-calculate-daily-net-radiation)
+- [III. Calculate Daily Reference Evapotranspiration](#iii-calculate-daily-reference-evapotranspiration)
 - [IV. Calculate Annual Values of Reference Evapotranspiration](#iv-calculate-annual-values-of-reference-evapotranspiration)
 - [V. Calculate the Relative Change in Reference Evapotranspiration](#v-calculate-the-relative-change-in-reference-evapotranspiration)
 - [VI. Calculate Reference Evapotranspiration for the Four Seasons](#vi-calculate-reference-evapotranspiration-for-the-four-seasons)
@@ -23,7 +23,7 @@ This project contains Python scripts for calculating and analyzing reference eva
     ```
 2. Download NetCDF files and set up directories as described in each section.
 
-## III. Calculate Daily Net radiation
+## II. Calculate Daily Net radiation
 
 `calculate_radiation.py`  
 This script calculates daily radiation input NetCDF files. The calculated values are saved in new NetCDF files.
