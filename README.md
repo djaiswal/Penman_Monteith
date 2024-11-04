@@ -1,66 +1,82 @@
-# Modified FAO-PM Equation
+# Reference Evapotranspiration Calculation
 
-## Data collection
+This repository contains scripts for calculating daily reference evapotranspiration (ETo) from climate data, specifically tailored for data within the Indian mainland. The project utilizes datasets from the ISIMIP repository and processes NetCDF files to produce masked data relevant to the region.
 
-The datasets for the calculation of daily reference ETo were downloaded from
-the ISIMIP repository for weather data. These datasets cover the CMIP6-based and bias-adjusted atmospheric climate input data of five CMIP6 GCMS, viz, GFDL-ESM4, IPSL-CM6A-LR, MPI-ESM1-2-HR, MRI-ESM2-0 and UKESM1-0-LL. These datasets belonging to each GCMs, if saved in separate folders, can serve better in the calculation and analysis for this study.
+## Table of Contents
+1. [Data Collection](#data-collection)
+2. [Calculation of Reference Evapotranspiration](#calculation-of-reference-evapotranspiration)
+3. [Masking NetCDF Files](#masking-netcdf-files-to-project-only-the-area-inside-the-indian-mainland)
 
-The data was downloaded as NetCDF files bound by latitudes 7.25 and 37.25 and longitudes 67.75 and 97.75, for the periods from 2021 to 2030 and from 2091 to 2100.
+## Data Collection
 
-Note: The file name of the daily weather data is expected to include the name of the GCM and and its corresponding starting year.
+The datasets for calculating daily reference ETo were downloaded from the ISIMIP repository, covering bias-adjusted atmospheric climate data from five CMIP6 GCMs:
+- GFDL-ESM4
+- IPSL-CM6A-LR
+- MPI-ESM1-2-HR
+- MRI-ESM2-0
+- UKESM1-0-LL
 
-The shapefile of India that was used to create plots and mask file for the NetCDF files downloaded as stated above was obtained from the site.
+Each dataset is stored in separate folders for easier analysis. Data files are in NetCDF format, spanning latitudes 7.25 to 37.25 and longitudes 67.75 to 97.75, covering two periods: 2021-2030 and 2091-2100.
 
+> **Note**: The filenames for daily weather data must include the GCM name and the starting year for proper processing.
+
+The shapefile of India, used to create plots and mask files, was obtained from an external source.
 
 ## Calculation of Reference Evapotranspiration
 
-### calculate_ETo.py
-	
-This code calculates the reference evapotranspiration without considering the effect of CO2 and considering the effect of  CO2 as two NetCDF files respectively in a selected directory.
+The `calculate_ETo.py` script calculates daily reference evapotranspiration with and without considering CO₂ effects. It outputs two NetCDF files for each dataset in the selected directory.
 
-#### Steps 
-Create a directory to save the NetCDF files with data of reference evapotranspiration. ( For Eg: Daily ETo NetCDF files)
-Enter the starting year of the decade for which reference evapotranspiration has to be calculated. For eg. , if the reference evapotranspiration for 2021 to 2030 has to be calculated, enter 2021 in the terminal.
-From the first file selection window, select the NetCDF files with the data for 
-	i . Relative humidity
-	ii.  Pressure
-	iii.  Long radiation
-	iv.  Short radiation
-	v.  Surface windspeed
-	vi. Daily Maximum Temperature
-	vii. Daily Minimum Temperature
-Click on the ‘Finish’ button to finish selecting the files.
-From the second selection window, select the directory where the NetCDF files with reference evapotranspiration calculated without considering the effect of CO2 and calculated considering the effect of CO2 have to be saved ( folder named ‘Daily ETo NetCDF files’  as described in step II.a.1).
+### Steps
+1. **Create Output Directory**  
+   Create a directory for saving the NetCDF files with the reference evapotranspiration data. (e.g., `Daily ETo NetCDF files`)
+   
+2. **Run the Script**  
+   Run the script and enter the starting year of the target decade (e.g., 2021 for 2021-2030).
+   
+3. **Select Input Files**  
+   Select the following NetCDF files in the prompted file selection windows:
+   - Relative Humidity
+   - Pressure
+   - Longwave Radiation
+   - Shortwave Radiation
+   - Surface Windspeed
+   - Daily Maximum Temperature
+   - Daily Minimum Temperature
 
-## Mask NetCDF files to project only the area inside the Indian Mainland.
+4. **Select Output Directory**  
+   Select the directory to save the calculated ETo NetCDF files for CO₂ and non-CO₂ calculations.
 
-A NetCDF file that can be used to mask the area inside the Indian Mainland,  can be created using the shapefile of India.
+## Masking NetCDF Files to Project Only the Area Inside the Indian Mainland
 
-Using ArcGIS software, the shapefile of India can be processed to create a NetCDF file with value = 0 for the area inside India and value = 1 for the area outside. This is a NetCDF file with one timestep.
+A mask for the Indian mainland is created using a shapefile, with steps provided to ensure accurate masking of multi-timestep NetCDF files.
 
-### mask0and1flipping.py 
+### Creating the Mask File
 
-This code creates a NetCDF file, that has value = 1 for the area inside India and values set as nan (not a number) for the area outside India using the NetCDF file obtained using ArcGIS software as mentioned above. The file is saved as ‘0and1proper_mask.nc’ in a selected folder. 
+Using ArcGIS software, process the Indian shapefile to produce a NetCDF file with a value of `0` inside India and `1` outside.
 
-#### Steps:
-Create a directory where the mask files have to be stored (E.g.: Mask files).
-Select the NetCDF file obtained using ArcGIS software (mentioned earlier) from the first file selection window.
-Select the directory where the NetCDF file which can be used to mask other NetCDF files is to be saved from the next selection window (the directory created as per step III.a.1). 
+### Scripts and Usage
 
-### mask3652days.py
+1. **`mask0and1flipping.py`**  
+   Converts the ArcGIS mask file to a format suitable for masking other NetCDF files, setting values inside India to `1` and outside to `NaN`.
 
-The NetCDF mask file created using mask0and1flipping.py can mask only NetCDF files with only one timestep appropriately. To mask a NetCDF file with 3652 timesteps (10 years in this case), the values in the former NetCDF file are replicated for 3652 timesteps and saved as a NetCDF file.
+   **Steps**:
+   - Create a directory to save mask files (e.g., `Mask files`).
+   - Select the original mask NetCDF file created with ArcGIS.
+   - Select the output directory for the processed mask file (`0and1proper_mask.nc`).
 
-#### Steps: 
-Select the mask file for one timestep (mask file created using mask0and1flipping.py) from the first selection window.
-Select the directory where the new mask file for 3652 timesteps (10 years) has to be saved (the directory created as per step III.a.1).
+2. **`mask3652days.py`**  
+   Converts a single-timestep mask to cover 3652 timesteps, suitable for a 10-year period.
 
-### mask_files_in_a_directory.py
+   **Steps**:
+   - Select the one-timestep mask file created by `mask0and1flipping.py`.
+   - Select the output directory for the 3652-timestep mask file.
 
-The NetCDF files containing the reference evapotranspiration data can be masked appropriately to retain only the data of the area inside the Indian mainland using this code.
+3. **`mask_files_in_a_directory.py`**  
+   This script masks all NetCDF files containing ETo data, retaining only data within the Indian mainland.
 
-#### Steps:
-Select the directory containing the NetCDF files of reference evapotranspiration to be masked and the mask NetCDF file from the selection window.
+   **Steps**:
+   - Select the directory containing ETo NetCDF files.
+   - Select the mask NetCDF file to apply to each file in the directory.
 
 
 ## IV. Calculate annual values of reference evapotranspiration.
