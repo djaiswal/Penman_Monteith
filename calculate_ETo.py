@@ -263,7 +263,7 @@ wind_speed = datawindspeed.variables["sfcwind"][:]
 # relative humidity in percentage                                               # relative humidity
 relative_humidity = datahurs.variables["hurs"][:]
 # in W/m^2 in netcdf file , converted to MJ/m^2                                 # net radiations
-net_radiation = datanetradn.variables["Net_radn"][:] * (0.0864)
+net_radiation = datanetradn.variables["net_radn"][:] * (0.0864)
 # in Pa in netcdf file , converted to KPa                                       # Atmospheric pressure
 P = datapressure.variables["ps"][:] * (10**-3)
 
