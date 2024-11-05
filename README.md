@@ -24,7 +24,14 @@ This project contains Python scripts for calculating and analyzing reference eva
 2. Download NetCDF files and set up directories as described in each section.
 
 ## II. Calculate Daily Net radiation
+`zenith_3652days.py`  
+This script is used to replicate values of elevation for 3652 time steps (10 years). The new values are saved in new NetCDF file named elevation_data_for_3652_days.nc.
 
+### Steps:
+1. Select the netcdf file with the data for elevation for one time step (The code assumes that this file has the data of elevation in the variable name 'elevation'.
+2. Choose where to save the output file with the data of radiation for 3652 days.
+
+   
 `calculate_radiation.py`  
 This script calculates daily radiation input NetCDF files. The calculated values are saved in new NetCDF files.
 
