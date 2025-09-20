@@ -2,6 +2,7 @@
 #        from the Zenith file for one timestep. This is saved as elevation_data_for_3652_days.nc in the selected directory. 
 
 #        Select the Zenith file with data for one time step.
+#        Enter the number of timesteps (3653 if time period is 2091-2100, else 3652 days).
 #        Select the directory where the Zenith file for 3652 timesteps has to be saved. 
 
 import numpy as np
@@ -108,7 +109,7 @@ with nc.Dataset(output_file, 'w', format='NETCDF4') as nc:
     # Create a data array by replicating the values for each time step
     replicated_values = np.tile(values, (time_size, 1, 1))
     replicated_values = replicated_values.astype('float32')  # Convert to float type
-    replicated_values = replicated_values.filled(np.nan)  # Fill masked values with an integer
+    replicated_values = replicated_values.filled(np.nan) 
 
     Zenith_data[:, :, :] = replicated_values
 
