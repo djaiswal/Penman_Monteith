@@ -23,7 +23,7 @@ This project contains Python scripts for calculating and analyzing reference eva
     ```
 2. Download NetCDF files and set up directories as described in each section.
 
-## II. Calculate Daily Net radiation
+## II. Calculate Daily Net radiation (Optional : Do this if only net radiation files have to be generated)
 `calculate_elevation.py`  
 This script is used to replicate values of elevation for time steps specified by the user. The new values are saved in new NetCDF file named elevation_data_for_<timesteps>_days.nc. 
 
