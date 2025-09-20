@@ -156,9 +156,6 @@ Calculates:
 
 ## VIII. Plotting the Data
 
-
-## VIII. Plotting the Data
-
 Plotting scripts are organized in the `code_for_plots` directory by figure and scenario. Use the following scripts for generating publication-quality plots:
 
 ### Fig4: Decadal Average of ETo
