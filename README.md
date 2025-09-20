@@ -156,23 +156,40 @@ Calculates:
 
 ## VIII. Plotting the Data
 
-### `plot_4ETosubplots.py`
-Generates subplots showing ETo with and without CO₂ effect for 2021-2030 and 2091-2100.
 
-#### Steps:
-1. Select NetCDF files for each ETo scenario for the chosen GCM.
-2. Provide the shapefile of India and specify output directory for the plot.
+## VIII. Plotting the Data
 
-### Plot Relative Change in Reference Evapotranspiration
-Creates a plot showing the temporal mean of relative change in ETo for a single GCM over ten years.
+Plotting scripts are organized in the `code_for_plots` directory by figure and scenario. Use the following scripts for generating publication-quality plots:
 
-#### Steps:
-1. Select NetCDF files with relative change data for 2021-2030 and 2091-2100.
-2. Provide the shapefile of India and specify the output directory.
+### Fig4: Decadal Average of ETo
+Script:
+- `both_scenario_gcm_v1.py` (comparison across scenarios)
+Location: `code_for_plots/Fig4-Decadal_avg_of_ETo/`
 
-### Plot Mean of Relative Change in Reference Evapotranspiration for Five GCMs
-Plots the mean of relative change in ETo across all five GCMs.
+### Fig5: Decadal Average of Difference in ETo
+Script:
+- `plot_both_gcms_v2.py` (plots both GCMs)
+Location: `code_for_plots/Fig5-Decadal_avg_of_difference_in_ETo/`
 
-#### Steps:
-1. Select NetCDF files for each GCM and period.
-2. Provide the shapefile of India and specify the output directory.
+### Fig6: Annual Time Series of ETo
+Scripts:
+- `plot_both_gcms.py` (plots both GCMs)
+- `plotssp126.py` (SSP1-2.6 scenario)
+- `plotssp585.py` (SSP5-8.5 scenario)
+Location: `code_for_plots/Fig6-Annual_time_series_of_ETo/`
+
+### Fig7: Seasonal Average of Relative Change in ETo
+Script:
+- `plot_both_gcms_v1.py` (seasonal relative change)
+Location: `code_for_plots/Fig7-Seasonal_average_of_relative_change_in_ETo/`
+
+### Fig9: Spatiotemporal Average of ETo
+Currently, this folder is empty. Add scripts here for spatiotemporal plots as needed.
+
+#### General Steps for Plotting:
+1. Select the appropriate NetCDF files for the scenario, GCM, and period as required by the script.
+2. Provide the shapefile of India (see `code_for_plots/Shapefiles/`).
+3. Specify the output directory for saving plots.
+4. Run the desired plotting script from its respective folder.
+
+Refer to comments in each script for specific input requirements and customization options.
