@@ -1,8 +1,8 @@
-# NOTE : This code is used to replicate the Zenith for 3652 timesteps (as we are calculating ETo for 10 years)
+# NOTE : This code is used to replicate the Zenith for 3652 or 3653 (given as an input) timesteps (as we are calculating ETo for 10 years)
 #        from the Zenith file for one timestep. This is saved as elevation_data_for_3652_days.nc in the selected directory. 
 
 #        Select the Zenith file with data for one time step.
-#        Enter the number of timesteps (3653 if time period is 2091-2100, else 3652 days).
+#        Enter the number of timesteps (3653 if time period is 2051-2060, else 3652 days).
 #        Select the directory where the Zenith file for 3652 timesteps has to be saved. 
 
 import numpy as np
@@ -39,7 +39,7 @@ label_1 = tk.Label(root, text="Zenith file : ")
 label_1.pack(pady=10)
 
 # Entry for time_size
-time_label = tk.Label(root, text="Number of timesteps (3653 if time period is 2091-2100, else 3652 days): ")
+time_label = tk.Label(root, text="Number of timesteps (3653 if time period is 2051-2060, else 3652 days): ")
 time_label.pack(pady=5)
 time_entry = tk.Entry(root)
 time_entry.pack(pady=5)
@@ -58,12 +58,12 @@ def browse_directory():
     global directory_path
     directory_path = filedialog.askdirectory()
     if directory_path:
-        directory_label.config(text=f"Selected Directory to save file with data of elevation for 3652 days: {directory_path}")
+        directory_label.config(text=f"Selected Directory to save file with data of elevation for {time_size} days: {directory_path}")
 
 root = tk.Tk()
 root.title("Directory Browser to save file with data of elevation ")
 root.geometry("800x200")  # Set the window size to 800x200
-directory_button = tk.Button(root, text="Browse Directory to save file with data of elevation for 3652 days", command=browse_directory)
+directory_button = tk.Button(root, text=f"Browse Directory to save file with data of elevation for {time_size} days", command=browse_directory)
 directory_button.pack(pady=10)
 directory_label = tk.Label(root, text="Selected Directory: ")
 directory_label.pack(pady=20)
@@ -86,7 +86,7 @@ lon_size = len(longitudes)
 
 
 # Creating the new NetCDF file 
-output_file = os.path.join(directory_path ,'elevation_data_for_3652_days.nc')                     
+output_file = os.path.join(directory_path ,'elevation_data_for_{time_size}_days.nc')                     
 with nc.Dataset(output_file, 'w', format='NETCDF4') as nc:
     # Define the dimensions
     nc.createDimension('lat', lat_size)

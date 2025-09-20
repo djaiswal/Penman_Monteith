@@ -1,4 +1,4 @@
-# NOTE : This code calculates the daily net radiation for a decade (either 2021-2030 or 2091-2100). 
+# NOTE : This code calculates the daily net radiation for a decade (2021-2030, 2051-2060, or 2091-2100). 
 
 #        Select the files containing the weather data from the first window. 
 #        Select the parent folder where the files with data of net radiation has to be saved(For Eg: ETo_files)
@@ -55,6 +55,7 @@ root.geometry("800x200")
 directory_button = tk.Button(
     root, text="Browse directory to save net radiation files", command=browse_directory
 )
+
 directory_button.pack(pady = 10)
 directory_label = tk.Label(root, text= "Selected Directory: ")
 directory_label.pack(pady = 10)
@@ -76,13 +77,18 @@ elif 'ukesm' in filepaths[0]:
     gcm_name = 'UKESM1-0-LL'
 
 #Create a new netcdf file to save the net radiation
-
+global num_days_in_decade
+num_days_in_decade = 3652 
 if '2021' in filepaths[0]:
     start_year = 2021
+    num_days_in_decade = 3652
 elif '2091' in filepaths[0]:
     start_year = 2091
+    num_days_in_decade = 3653
+elif '2051' in filepaths[0]:
+    start_year = 2051
+    num_days_in_decade = 3652
 
-    
 def calculate_rn(rsds, lat, tasmax, tasmin, ea, z, J):
     phi = (lat/180)*np.pi     # convert latitude in decimal degree to latitude in radian
     sigma = 4.903 * (10**-9)    # Steffan boltzmann constant in MJ K^-4 m^-2 day^-1
@@ -118,6 +124,8 @@ def create_netcdf(file_name, output_directory, ref_dataset, start_year, rn_data)
         time_var.units = "days since 2021-1-1 00:00:00"
     elif start_year == 2091:
         time_var.units = "days since 2091-1-1 00:00:00"
+    elif start_year == 2051:
+        time_var.units = "days since 2051-1-1 00:00:00"
     lat_var.units = "degrees_north"
     lon_var.units = "degrees_east"
 
@@ -153,18 +161,26 @@ elev_data = dataelevation.variables['Zenith_data'][:]
 lat_data = datarsds.variables["lat"][:]
 lat_data = lat_data[np.newaxis, :, np.newaxis]
 lat_data = np.repeat(lat_data, 61, axis=-1)
-lat_data = np.repeat(lat_data, 3652, axis=0)
-lat_data = lat_data.reshape(3652, 61, 61)
+lat_data = np.repeat(lat_data, num_days_in_decade, axis=0)
+lat_data = lat_data.reshape(num_days_in_decade, 61, 61)
 
 
-days_per_year = [365 if year%4!=0 else 366 for year in range(1, 11)]
+start_decade = start_year
+end_decade = start_year + 9
+days_per_year = []
+for year in range(start_decade, end_decade + 1):
+    # 2100 is not a leap year, all other years divisible by 4 are leap years
+    if (year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)) and year != 2100:
+        days_per_year.append(366)
+    else:
+        days_per_year.append(365)
 days = []
 for ndays in days_per_year:
     for day in range(ndays):
         days.append((day+1))
 days = np.array(days)
 days_decade = np.repeat(days[:, np.newaxis, np.newaxis], 61*61, axis=-1)
-days_decade = days_decade.reshape(3652,61,61)
+days_decade = days_decade.reshape(num_days_in_decade, 61, 61)
 
 def calculate_ea(temp_max, temp_min, rel_humidity):
     tmean = ((temp_min + temp_max)/2) - 273 # to convert into deg celcius
