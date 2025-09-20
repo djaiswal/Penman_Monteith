@@ -31,6 +31,9 @@ This script is used to replicate values of elevation for 3652 time steps (10 yea
 1. Select the netcdf file with the data for elevation for one time step (The code assumes that this file has the data of elevation in the variable name 'elevation').
 2. Choose where to save the output file with the data of radiation for 3652 days.
 
+   <img width="997" height="282" alt="image" src="https://github.com/user-attachments/assets/6f4182fa-876e-4bc0-b46f-e2c64ecc9718" />
+
+
    
 `calculate_radiation.py`  
 This script calculates daily radiation input NetCDF files. The calculated values are saved in new NetCDF files.
