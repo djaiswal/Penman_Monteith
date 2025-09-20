@@ -5,7 +5,7 @@ This project contains Python scripts for calculating and analyzing reference eva
 ## Table of Contents
 
 - [I. Setup Instructions](#i-setup-instructions)
-- [II. Calculate Daily Net_radiation](#ii-calculate-daily-net-radiation)
+- [II. Calculate Daily Net_radiation](#ii-calculate-daily-net-radiation) (Optional : Do this if only net radiation files have to be generated)
 - [III. Calculate Daily Reference Evapotranspiration](#iii-calculate-daily-reference-evapotranspiration)
 - [IV. Calculate Annual Values of Reference Evapotranspiration](#iv-calculate-annual-values-of-reference-evapotranspiration)
 - [V. Calculate the Relative Change in Reference Evapotranspiration](#v-calculate-the-relative-change-in-reference-evapotranspiration)
