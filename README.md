@@ -50,13 +50,25 @@ This script calculates daily radiation input NetCDF files. The calculated values
    
 ## III. Calculate Daily Reference Evapotranspiration
 
-`calculate_Eto.py`  
-This script calculates daily ETo using input NetCDF files. The calculated values are saved in new NetCDF files.
+`calculate_Eto_ssp126.py`  
+This script calculates daily ETo using input NetCDF files for the scenario SSP-1-2.6. The calculated values are saved in new NetCDF files.
 
 ### Steps:
-1. Create a directory to save the output files, e.g., `daily_ETo`.
-2. Select the directory containing input climate data in NetCDF format.
-3. Choose where to save the output daily ETo files.
+1. Create a directory to save the output files, e.g., `ETo_files`.
+2. Run the code. 
+3. Enter the starting year of the decade for which reference evapotranspiration has to be calculated.
+   i.e, 2021 for the decade 2021-2030, 2051 for the decade 2051-2060, or 2091 for the decade 2091-2100.
+4. Select the files containing the weather data (for SSP1-2.6) from the first window. 
+5. Select the parent folder where the ETo files for each GCM has to be saved. (For Eg: ETo_files)
+        Separate folders are created for different GCMs and respective files are saved there.
+        This creates a directory structure as follows:
+ 
+           ETo_files
+                |--- GFDL-ESM4 (contains ETo files for GFDL-ESM4)
+                |--- IPSL-CM6A-LR (contains ETo files for IPSL-CM6A-LR)
+                |--- MPI-ESM1-2-HR (contains ETo files for MPI-ESM1-2-HR)
+                |--- MRI-ESM2-0 (contains ETo files for MRI-ESM2-0)
+                |--- UKESM1-0-LL (contains ETo files for UKESM1-0-LL)
 
 ## IV. Calculate Annual Values of Reference Evapotranspiration
 
@@ -64,9 +76,18 @@ This script calculates daily ETo using input NetCDF files. The calculated values
 Calculates the annual average of daily ETo over a selected region and saves the results as an Excel file.
 
 #### Steps:
-1. Create a directory to save the Excel file, e.g., `annual_avg`.
-2. Select the folder containing NetCDF files with daily ETo data.
-3. Specify where to save the Excel file with the annual averages.
+1. Select the directory containing NetCDF files of daily Eto from selection window.
+        Suppose the directory structure is as follows:
+           ETo_files
+                |--- GFDL-ESM4
+                |--- IPSL-CM6A-LR
+                |--- MPI-ESM1-2-HR
+                |--- MRI-ESM2-04-0
+                |--- UKESM1-0-LL
+
+        Select the directory 'ETo_files' in the selection window.
+
+2.        The second input required is the directory to which annual average of Eto has to be saved.
 
 ### `annual_sum_of_eto.py`
 Calculates the total annual ETo for each NetCDF file, storing results in an Excel sheet.
