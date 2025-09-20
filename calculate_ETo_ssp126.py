@@ -1,12 +1,20 @@
-# NOTE : This code calculates the Reference evapotranspiration for a decade (eg: 2021-2030 or 2091-2100)
+# NOTE : This code calculates the Reference evapotranspiration for a decade (eg: 2021-2030, 2051-2060, or 2091-2100)
 #        The ETo values calculated without considering the effect of CO2 and ETo values calculated considering
 #        the effect of CO2 are saved separately in a selected directory.
 
 #        Enter the starting year of the decade for which reference evapotranspiration has to be calculated.
+#        i.e, 2021 for the decade 2021-2030, 2051 for the decade 2051-2060, or 2091 for the decade 2091-2100.
 #        Select the files containing the weather data from the first window. 
 #        Select the parent folder where the ETo files for each GCM has to be saved. (For Eg: ETo_files)
-#        Separate folders are created for different GCMs in a subdirectory named unmasked ETo files 
-#        and respective files are saved there.
+#        Separate folders are created for different GCMs and respective files are saved there.
+#        This creates a directory structure as follows:
+# 
+#           ETo_files
+#                |--- GFDL-ESM4 (contains ETo files for GFDL-ESM4)
+#                |--- IPSL-CM6A-LR (contains ETo files for IPSL-CM6A-LR)
+#                |--- MPI-ESM1-2-HR (contains ETo files for MPI-ESM1-2-HR)
+#                |--- MRI-ESM2-0 (contains ETo files for MRI-ESM2-0)
+#                |--- UKESM1-0-LL (contains ETo files for UKESM1-0-LL)
 
 
 import numpy as np
@@ -188,15 +196,15 @@ def calculate_gs(start_year, gs_ref):
     if start_year == '2021':
         """
         2021  417.04
-2022  419.81
-2023  422.50
-2024  425.12
-2025  427.67
-2026  430.17
-2027  432.60
-2028  434.97
-2029  437.29
-2030  439.56
+        2022  419.81
+        2023  422.50
+        2024  425.12
+        2025  427.67
+        2026  430.17
+        2027  432.60
+        2028  434.97
+        2029  437.29
+        2030  439.56
         """
         data1 = np.array([417.04, 419.81, 422.50, 425.12, 427.67,                   # CO2 concentrations in the years from 2021-2030
                           430.17, 432.60, 434.97, 437.29, 439.56])
@@ -213,15 +221,15 @@ def calculate_gs(start_year, gs_ref):
     elif start_year == '2091':
         """
         2091  455.71
-2092  454.50
-2093  453.32
-2094  452.16
-2095  451.02
-2096  449.91
-2097  448.81
-2098  447.73
-2099  446.67
-2100  445.62
+        2092  454.50
+        2093  453.32
+        2094  452.16
+        2095  451.02
+        2096  449.91
+        2097  448.81
+        2098  447.73
+        2099  446.67
+        2100  445.62
         """
         data2 = np.array([455.71, 454.50, 453.32, 452.16, 451.02,                   # CO2 concentrations in the years from 2091-2100
                           449.91, 448.81, 447.73, 446.67, 445.62])
@@ -237,15 +245,15 @@ def calculate_gs(start_year, gs_ref):
     elif start_year == '2051':
         """
         2051  470.02
-2052  470.66
-2053  471.25
-2054  471.78
-2055  472.25
-2056  472.66
-2057  473.02
-2058  473.32
-2059  473.56
-2060  473.75
+        2052  470.66
+        2053  471.25
+        2054  471.78
+        2055  472.25
+        2056  472.66
+        2057  473.02
+        2058  473.32
+        2059  473.56
+        2060  473.75
         """
         data3 = np.array([470.02, 470.66, 471.25, 471.78, 472.25,                   # CO2 concentrations in the years from 2051-2060
                           472.66, 473.02, 473.32, 473.56, 473.75])
@@ -351,12 +359,6 @@ def create_netcdf(file_name, output_directory, time_dim, latitude_dim, longitude
     print(f"ET0 data saved to {output_file}")
     return
 
-# file of datahurs contains hurs in its name, datapressure contains ps in its name,
-# datarsds contains rsds in its name, datawindspeed contains sfcwind in its name,
-# datatempmax contains tasmax in its name, datatempmin contains tasmin in its name,
-# dataelevation contains elevation in its name
-# use this information to select the files containing the required variables
-# Open the input NetCDF files
 datahurs = nc.Dataset(file_paths[0], 'r')
 datapressure = nc.Dataset(file_paths[1], 'r')
 # dataz = nc.Dataset(file_paths[2], 'r')

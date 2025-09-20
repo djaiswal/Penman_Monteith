@@ -1,12 +1,20 @@
-# NOTE : This code calculates the Reference evapotranspiration for a decade (eg: 2021-2030 or 2091-2100) for the ssp585 scenario.
+# NOTE : This code calculates the Reference evapotranspiration for a decade (eg: 2021-2030, 2051-2060, or 2091-2100) for the ssp585 scenario.
 #        The ETo values calculated without considering the effect of CO2 and ETo values calculated considering
 #        the effect of CO2 are saved separately in a selected directory.
 
 #        Enter the starting year of the decade for which reference evapotranspiration has to be calculated.
+#        i.e, 2021 for the decade 2021-2030, 2051 for the decade 2051-2060, or 2091 for the decade 2091-2100.
 #        Select the files containing the weather data from the first window. 
 #        Select the parent folder where the ETo files for each GCM has to be saved. (For Eg: ETo_files)
-#        Separate folders are created for different GCMs in a subdirectory named unmasked ETo files 
-#        and respective files are saved there.
+#        Separate folders are created for different GCMs and respective files are saved there.
+#        This creates a directory structure as follows:
+# 
+#           ETo_files
+#                |--- GFDL-ESM4 (contains ETo files for GFDL-ESM4)
+#                |--- IPSL-CM6A-LR (contains ETo files for IPSL-CM6A-LR)
+#                |--- MPI-ESM1-2-HR (contains ETo files for MPI-ESM1-2-HR)
+#                |--- MRI-ESM2-0 (contains ETo files for MRI-ESM2-0)
+#                |--- UKESM1-0-LL (contains ETo files for UKESM1-0-LL)
 
 
 import numpy as np
@@ -93,7 +101,6 @@ elif 'ukesm' in file_paths[0]:
     gcm_name = 'UKESM1-0-LL'
 
 # Create a new directory to save the NetCDF files according to GCMs 7(if it is not present already)
-# output_parent_directory = os.path.join(directory_path, 'unmasked_ETo_files')
 # os.makedirs(output_parent_directory, exist_ok=True)
 output_directory = os.path.join(directory_path, gcm_name)
 os.makedirs(output_directory, exist_ok=True)
@@ -213,17 +220,17 @@ def calculate_gs(start_year, gs_ref):
        
     elif start_year == '2051':
         # CO2 concentrations in the years from 2051-2060
-        """2051  569.93
-2052  577.26
-2053  584.78
-2054  592.51
-2055  600.43
-2056  608.55
-2057  616.87
-2058  625.39
-2059  634.11
-2060  643.04
-
+        """
+            2051  569.93
+            2052  577.26
+            2053  584.78
+            2054  592.51
+            2055  600.43
+            2056  608.55
+            2057  616.87
+            2058  625.39
+            2059  634.11
+            2060  643.04
         """
         data3 = np.array([569.93, 577.26, 584.78, 592.51, 600.43,                   # CO2 concentrations in the years from 2051-2060
                           608.55, 616.87, 625.39, 634.11, 643.04])
@@ -329,15 +336,9 @@ def create_netcdf(file_name, output_directory, time_dim, latitude_dim, longitude
     print(f"ET0 data saved to {output_file}")
     return
 
-# file of datahurs contains hurs in its name, datapressure contains ps in its name,
-# datarsds contains rsds in its name, datawindspeed contains sfcwind in its name,
-# datatempmax contains tasmax in its name, datatempmin contains tasmin in its name,
-# dataelevation contains elevation in its name
-# use this information to select the files containing the required variables
 # Open the input NetCDF files
 datahurs = nc.Dataset(file_paths[0], 'r')
 datapressure = nc.Dataset(file_paths[1], 'r')
-# dataz = nc.Dataset(file_paths[2], 'r')
 datarsds = nc.Dataset(file_paths[2], 'r')
 datawindspeed = nc.Dataset(file_paths[3], 'r')
 datatempmax = nc.Dataset(file_paths[4], 'r')
