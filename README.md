@@ -33,6 +33,8 @@ This script is used to replicate values of elevation for time steps specified by
 2.  An interface appears to select the netcdf file with input elevation data and the number of timesteps for replicating the data. 
 3. Select the netcdf file with the data for elevation for one time step.
 4. Enter the number of time steps for which the data has to be replicated. In this project, we calculate the data for ten consecutive years in most cases. So here the expected value is the number of days in ten years.i.e, 3652 for any consecutive ten years not including the year 2100, or 3653 for consecutive ten years including 2100. Click on `Finish selecting file` button.
+   <img width="1001" height="348" alt="image" src="https://github.com/user-attachments/assets/15708dbf-9cd8-4bfc-9a5d-00b728716e3d" />
+
 5. From the next interface, choose where to save the output file with the data of radiation for the given number of days. The netcdf file with the data of elevation for the specified number of days will be saved in this folder with the name elevation_data_for_<timesteps>_days.nc.
 
    <img width="997" height="282" alt="image" src="https://github.com/user-attachments/assets/6f4182fa-876e-4bc0-b46f-e2c64ecc9718" />
