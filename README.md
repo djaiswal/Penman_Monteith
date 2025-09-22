@@ -2,6 +2,8 @@
 
 This project contains Python scripts for calculating and analyzing reference evapotranspiration (ETo) from NetCDF files. The scripts include codes for calculating ETo with and without considering the effect of CO₂ concentration changes, analyzing the relative and percentage changes over time, and generating plots for data visualization.
 
+The input weather data used for the calculations were downloaded from : https://data.isimip.org/
+
 ## Table of Contents
 
 - [I. Setup Instructions](#i-setup-instructions)
